@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Skin Apsor</title>
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f8fa;
+            color: #333;
+            margin-top: 200px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #4f7da4;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #007bff;
+        }
+
+        .highlight.avoid {
+            color: red;
+        }
+
+        .ingredients-section {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .ingredients-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .ingredients-group {
+            margin-bottom: 30px;
+        }
+
+        .ingredients-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            padding: 20px 0;
+            overflow-x: hidden;
+        }
+
+        .ingredients-list {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            max-width: 80%;
+            padding: 0 10px; /* Added padding to fix cut-off issue */
+            justify-content: flex-start;
+        }
+
+        .ingredient-item {
+            min-width: 140px;
+            min-height: 140px;
+            background-color: #72c5ff;
+            margin: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ingredient-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 12px 25px;
+            background-color: #4f7da4;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #3b5c83;
+        }
+
+        .navigation-buttons a {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Scrollbar Styling */
+        .ingredients-list::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .ingredients-list::-webkit-scrollbar-thumb {
+            background-color: #4f7da4;
+            border-radius: 10px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .ingredients-list {
+                max-width: 100%;
+            }
+
+            .ingredient-item {
+                min-width: 120px;
+                min-height: 120px;
+                font-size: 1em;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            h2, h3 {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ingredient-item {
+                min-width: 80px;
+                min-height: 100px;
+            }
+
+            .btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .ingredients-container {
+                flex-direction: column;
+            }
+
+            h2, h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body class="scan-container">
+    <header>
+        <h2 class="logo">
+            <div class="logo">
+                <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+                <span class="logo-text">Skin Apsor</span>
+            </div>
+        </h2>
+        <nav class="navigation">
+            <!-- Navigation links (hidden on mobile) -->
+            <a class="hideOnMobile" href="/index.html">Home</a>
+            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
+            <a class="hideOnMobile" href="/Product.html">Products</a>
+            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <button class="hideOnMobile btnLogin-popup">Login</button>
+
+            <!-- Menu Icon (SVG for mobile menu toggle) -->
+            <a href="#" class="menu-icon" onclick="showSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000">
+                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                </svg>
+            </a>
+        </nav>
+
+        <!-- Sidebar Navigation -->
+        <nav class="side-bar">
+            <a href="#" class="close-icon" onclick="hideSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000">
+                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                </svg>
+            </a>
+            <h2> Skin Apsor</h2>
+            <a href="/index.html">Home</a>
+            <a href="/Scan.html">Scanning</a>
+            <a href="/Product.html">Products</a>
+            <a href="/contact.html">About Us</a>
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+
+        <script>
+            function showSidebar() {
+                const sidebar = document.querySelector('.side-bar');
+                sidebar.style.display = 'flex';
+            }
+
+            function hideSidebar() {
+                const sidebar = document.querySelector('.side-bar');
+                sidebar.style.display = 'none';
+            }
+        </script>
+
+
+        
+
+    </header>
+    <main>
+        <div class="ingredients-section">
+            <h2>PRODUCTS RECOMMENDATIONS</h2>
+        
+            <div class="ingredients-box">
+                <!-- Ingredients You Should Use -->
+                <div class="ingredients-group">
+                    <h3>Products You Should <span class="highlight">Use:</span></h3>
+                    <div class="ingredients-container">
+                        <div class="ingredients-list" id="use">
+                            <div class="ingredient-item" onclick="addToCart('Product 1')">Product 1</div>
+                            <div class="ingredient-item" onclick="addToCart('Product 2')">Product 2</div>
+                            <div class="ingredient-item" onclick="addToCart('Product 3')">Product 3</div>
+                            
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Ingredients You Should Avoid -->
+                <div class="ingredients-group">
+                    <h3>Products You Should <span class="highlight avoid">Avoid:</span></h3>
+                    <div class="ingredients-container avoid-container">
+                        <div class="ingredients-list" id="avoid">
+                            <div class="ingredient-item" onclick="addToCart('Product 1')">Product 1</div>
+                            <div class="ingredient-item" onclick="addToCart('Product 2')">Product 2</div>
+                            <div class="ingredient-item" onclick="addToCart('Product 3')">IProduct 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="navigation-buttons">
+                <a href="/Scan8.html" class="btn go-back-btn">Go Back</a>
+                <a href="/Product.html" class="btn">Next</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function addToCart(item) {
+            let userConfirm = confirm(`Do you want to add ${item} to your cart?`);
+            if (userConfirm) {
+                alert(`${item} has been added to your cart!`);
+                // Add logic to actually add the item to the cart here (e.g., API call or sessionStorage update)
+            } else {
+                alert(`You chose not to add ${item} to the cart.`);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Apsor Advisor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* General Styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 1000px;
+            background-image: url('img/sample.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #ffffff;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            height: 40px;
+            margin-left: 20px;
+           
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .navigation a,
+        .btnLogin-popup {
+            text-decoration: none;
+            margin-left: 15px;
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .menu-icon {
+            display: none;
+            margin-right: 10px;
+        }
+
+        .side-bar {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 70%;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .side-bar a {
+            text-decoration: none;
+            font-size: 18px;
+            margin: 10px 0;
+            color: #000;
+        }
+
+        .close-icon {
+            align-self: flex-end;
+        }
+
+        /* Main Container */
+        .main-content {
+            margin-top: 80px; /* Push content below the header */
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .background {
+            position: fixed; /* Fixed to stay behind all content even when scrolling */
+            top: 0;
+            left: 0;
+            width: 100vw; /* Ensure full viewport width */
+            height: 100vh; /* Ensure full viewport height */
+            background-image: url('img/sample.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+            z-index: -1;
+            pointer-events: none; /* Prevent interaction with the background */
+        }
+        .step {
+            margin: 30px 0;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: #0056b3;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .start-button {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background-color 0.3s;
+        }
+
+        .start-button:hover {
+            background-color: #0056b3;
+        }
+        .main-content h1 {
+            color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hideOnMobile {
+                display: none;
+            }
+
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+            <span class="logo-text">Skin Apsor</span>
+        </div>
+
+        <nav class="navigation">
+            <a class="hideOnMobile" href="/index.html">Home</a>
+            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
+            <a class="hideOnMobile" href="/Product.html">Products</a>
+            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <button class="hideOnMobile btnLogin-popup">Login</button>
+
+            <a href="#" class="menu-icon" onclick="showSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000">
+                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                </svg>
+            </a>
+        </nav>
+
+        <nav class="side-bar">
+            <a href="#" class="close-icon" onclick="hideSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000">
+                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                </svg>
+            </a>
+            <h2>Skin Apsor</h2>
+            <a href="/index.html">Home</a>
+            <a href="/Scan.html">Scanning</a>
+            <a href="/Product.html">Products</a>
+            <a href="/contact.html">About Us</a>
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <h1>Welcome to Skin Apsor Advisor</h1>
+
+        <div class="step">
+            <div class="step-number">1</div>
+            <h2>SNAP YOUR FACE</h2>
+            <p>If you are ready for your best skin day, use our AI technology to analyze your facial skin from just one selfie.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2</div>
+            <h2>TELL US ABOUT YOUR SKIN</h2>
+            <p>Answer a few questions about your skin concerns and product preferences so we can tailor the products for you.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3</div>
+            <h2>GET YOUR RESULTS</h2>
+            <p>In just a few seconds, you will see your skin analysis and recommended products that suit you.</p>
+        </div>
+
+        <button class="start-button" onclick="window.location.href='Scan1.html'">START NOW</button>
+
+    </div>
+
+    <script>
+        function showSidebar() {
+            document.querySelector('.side-bar').style.display = 'flex';
+        }
+
+        function hideSidebar() {
+            document.querySelector('.side-bar').style.display = 'none';
+        }
+    </script>
+
+</body>
+
+</html>

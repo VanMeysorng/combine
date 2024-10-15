@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Skin Apsor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* Resetting default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+        font-family: Arial, sans-serif;
+        background-color: #cff0fe;
+    }
+
+    /* Header styling */
+    header {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo-image {
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .logo-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .navigation a,
+    .btnLogin-popup {
+        text-decoration: none;
+        margin-left: 15px;
+        color: #007bff;
+        font-weight: 500;
+    }
+
+    .menu-icon {
+        display: none;
+        cursor: pointer;
+    }
+
+    /* Sidebar styles */
+    .side-bar {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 70%;
+        max-width: 400px;
+        height: 100vh;
+        background-color: white;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .side-bar h2 {
+        margin-bottom: 20px;
+        color: #007bff;
+    }
+
+    .side-bar a {
+        text-decoration: none;
+        font-size: 18px;
+        margin: 10px 0;
+        color: #000;
+    }
+
+    .close-icon {
+        align-self: flex-end;
+    }
+
+        /* Products container styling */
+    .products-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center products horizontally */
+        gap: 20px; /* Space between product cards */
+        padding: 20px;
+    }
+
+    /* Product card styling */
+    .product-card {
+        width: calc(25% - 20px); /* Set each product card to 25% of the container */
+        max-width: 300px; /* Limit maximum width */
+        min-width: 200px; /* Ensure it stays reasonable on smaller screens */
+        margin: 10px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 15px;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .product-card h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .product-card p {
+        margin-bottom: 10px;
+    }
+
+    .product-card .price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .product-card .rating {
+        margin-top: 5px;
+    }
+
+    /* Search bar styling */
+    .search-b {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .search-b input {
+        width: 70%;
+        max-width: 400px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 20px 0 0 20px;
+        outline: none;
+        font-size: 16px;
+    }
+
+    .search-b button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 0 20px 20px 0;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .hideOnMobile {
+            display: none;
+        }
+
+        .menu-icon {
+            display: block;
+        }
+
+        .product-card {
+            width: 100%; /* Make each product take full width on smaller screens */
+        }
+    }
+    /* Responsive design for smaller screens */
+    @media (max-width: 1024px) {
+        .product-card {
+            width: calc(33.33% - 20px); /* 3 products per row */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .product-card {
+            width: calc(50% - 20px); /* 2 products per row */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .product-card {
+            width: calc(100% - 20px); /* 1 product per row */
+        }
+}
+</style>
+
+<body class="Pro-container">
+
+    <header>
+        <h2 class="logo">
+            <div class="logo">
+                <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+                <span class="logo-text">Skin Apsor</span>
+            </div>
+        </h2>
+        <nav class="navigation">
+            <!-- Navigation links (hidden on mobile) -->
+            <a class="hideOnMobile" href="/index.html">Home</a>
+            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
+            <a class="hideOnMobile" href="/Product.html">Products</a>
+            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <button class="hideOnMobile btnLogin-popup">Login</button>
+            <!-- Menu Icon (SVG for mobile menu toggle) -->
+            <a href="#" class="menu-icon" onclick="showSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000">
+                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+                </svg>
+            </a>
+        </nav>
+        
+        <script>
+            function showSidebar() {
+                const sidebar = document.querySelector('.side-bar');
+                sidebar.style.display = 'flex'
+            }
+
+            function hideSidebar() {
+                const sidebar = document.querySelector('.side-bar');
+                sidebar.style.display = 'none'
+            }
+
+        </script>
+
+        <nav class="side-bar">
+            <a href="#" class="close-icon" onclick="hideSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+            </a>
+            <h2> Skin Apsor</h2>
+            <a href="/index.html">Home</a>
+            <a href="/Scan.html">Scanning</a>
+        
+            <a href="/Product.html">Products</a>
+            
+            <a href="/contact.html">About Us</a>
+            <button class="btnLogin-popup">Login</button>
+
+        </nav>
+        
+    </header>
+
+    <main>
+
+        <h1>All Products</h1>
+
+        <form action="/search"  class="search-b">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        
+        <div class="products-container">
+           
+            <!-- Each product card -->
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/files/41YlCQmxNqL._AC_1024x1024@2x.jpg?v=1718776687" alt="Anua Heartleaf Cleanser" />
+                <h2>Anua Heartleaf Cleanser</h2>
+                <p>A lightweight essence powered by 96.3% snail mucin to repair and hydrate damaged skin, leaving it supple and glowing.
+                </p>
+                <span class="price">7.77 $</span>
+                <div class="rating">⭐️⭐️⭐⭐⭐ (5.0)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://static.beautytocare.com/media/catalog/product/c/o/cosrx-advanced-snail-96-mucin-power-essence-100ml.jpg" alt="CosRx Advanced Snail Mucin Power Essence" />
+                <h2>CosRx Advanced Snail Mucin Power Essence</h2>
+                <p>A lightweight essence powered by 96.3% snail mucin...</p>
+                <span class="price">12.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.0)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/products/32081_l1_S_450_600x_e5eceddd-7c12-4d1e-b009-1093d956d0b4_450x.webp?v=1673196954" alt="Innisfree Green Tea Seed Serum" />
+                <h2>Innisfree Green Tea Seed Serum</h2>
+                <p>A hydrating serum enriched with Jeju green tea extract and seed oil to deeply nourish and restore moisture to the skin.</p>
+                <span class="price">12.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.0)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://cdn.cosmostore.org/cache/front/shop/products/511/1559799/350x350.jpg" alt="EltaMD UV Clear Broad-Spectrum SPF 46" />
+                <h2>EltaMD UV Clear Broad-Spectrum SPF 46</h2>
+                <p>A sunscreen that offers broad-spectrum protection against UVA and UVB rays and is ideal for sensitive or acne-prone skin.</p>
+                <span class="price">36.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/products/cosrx-aloe-soothing-sun-cream-50ml-11348169916482_grande_1f7ec25b-8269-4f07-a2b7-da731602051d_500x.jpg?v=1637595840" alt="COSRX Aloe Soothing Sun Cream SPF50 PA+++" />
+                <h2>COSRX Aloe Soothing Sun Cream SPF50 PA+++</h2>
+                <p>A lightweight sun cream that soothes and moisturizes the skin while providing high spectrum protection against UVA and UVB rays.</p>
+                <span class="price">15.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            </div>
+            
+            <div class="product-card">
+                <img src="https://cdn.cosmostore.org/cache/front/shop/products/636/1963001/350x350.jpg" alt="Etude House Wonder Pore Freshner" />
+                <h2>Etude House Wonder Pore Freshner</h2>
+                <p>This multi-tasking toner deeply cleanses pores, maintains pH levels, and refines the skin texture.</p>
+                <span class="price">12.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://koreanbeautypoint.com/wp-content/uploads/2024/02/Avon-The-Face-Shop-Rice-Water-Bright-Foaming-Cleanser-300-mL_3dd999fd-8dd9-4f08-9074-fb2416181fc5.b0ef355ce24f7f2016aeff5ba4fa26d4.jpeg" alt="The Face Shop Rice Water Bright Cleansing Foam" />
+                <h2>The Face Shop Rice Water Bright Cleansing Foam</h2>
+                <p>A gentle cleansing foam enriched with rice water and rice bran particles to brighten and hydrate the skin.</p>
+                <span class="price">10.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.4)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSneo2kFoLfR00QQnTchmxUsW2rTf7ea9aIIQ&s" alt="Mizon Snail Recovery Gel Cream" />
+                <h2>Mizon Snail Recovery Gel Cream</h2>
+                <p>This gel cream utilizes snail mucin extract for soothing, hydrating, and repairing the skin.</p>
+                <span class="price">9.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+            </div>
+            
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.coos-cosmetics.com/cdn/shop/files/Klairs-Rich-Moist-Soothing-Serum.webp?v=1700908337&width=1100" alt="Klairs Rich Moist Soothing Serum" />
+                <h2>Klairs Rich Moist Soothing Serum</h2>
+                <p>A calming, hydrating serum designed for sensitive skin that soothes and rejuvenates with its moisture barrier.</p>
+                <span class="price">22.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://cdn.cosmostore.org/cache/front/shop/products/633/1954186/650x650.jpg" alt="TonyMoly I'm Real Avocado Mask Sheet" />
+                <h2>TonyMoly I'm Real Avocado Mask Sheet</h2>
+                <p>Nourishing mask sheet that hydrates and conditions skin with avocado extract, delivering healthy fats and antioxidants.</p>
+                <span class="price">3.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.4)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/files/Missha-All-Around-Safe-Block-Soft-Finish-Sun-Milk-SPF50-Or-PA2-600x600_1024x1024@2x.jpg?v=1698730104" alt="Missha All Around Safe Block Soft Finish Sun Milk SPF50+/PA+++" />
+                <h2>Missha All Around Safe Block Soft Finish Sun Milk SPF50+/PA+++</h2>
+                <p>A water and sweat-resistant sunscreen that provides a smooth finish without stickiness, offering high protection against UV rays.</p>
+                <span class="price">18.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://d3i908zd4kzakt.cloudfront.net/data/item/1631519326/thumb-masterpatchintensive36_500x500.jpg" alt="COSRX Acne Pimple Master Patch" />
+                <h2>COSRX Acne Pimple Master Patch</h2>
+                <p>An overnight fix to make whiteheads, blackheads, and picked zits disappear by morning.</p>
+                <span class="price">6.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.laneige.com/int/en/skincare/__icsFiles/afieldfile/2024/05/07/240416_final_INT_CREAM-SKIN_thumbnail_01_3.jpg" alt="Laneige Cream Skin Refiner" />
+                <h2>Laneige Cream Skin Refiner</h2>
+                <p>A two-in-one formula that preps and softens like a toner and moisturizes like a cream for maximum hydration benefits.</p>
+                <span class="price">33.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyb8Glo8VvwwEWFMFxNcZsbpJkP2bA6vJ5Jg&s" alt="Innisfree Super Volcanic Pore Clay Mask" />
+                <h2>Innisfree Super Volcanic Pore Clay Mask</h2>
+                <p>A clay mask with super volcanic cluster capsules to absorb sebum and provide pore care.</p>
+                <span class="price">15.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://static.beautytocare.com/media/catalog/product/m/i/missha-time-revolution-the-first-essence-5x-150ml.jpg" alt="Missha Time Revolution The First Treatment Essence" />
+                <h2>Missha Time Revolution The First Treatment Essence</h2>
+                <p>This essence helps to moisturize, hydrate, brighten, reduce wrinkles, and improve elasticity.</p>
+                <span class="price">29.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://koreacosmeticsbn.com/cdn/shop/products/Etude_House_Soon_Jung_pH_6.5_Whip_Cleanser_Nudie_Glow_Korean_Beauty_Australia_1024x1024_3217b1e3-d70e-4325-b369-90014a8ccb66_1024x.webp?v=1703557091" alt="Etude House Soon Jung pH 6.5 Whip Cleanser" />
+                <h2>Etude House Soon Jung pH 6.5 Whip Cleanser</h2>
+                <p>A gentle cleanser with an optimally balanced pH level that soothes skin while cleansing without causing irritation.</p>
+                <span class="price">14.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.drjart.com/media/export/cms/products/1000x1000/dj_sku_H6MM01_1000x1000_0.jpg" alt="Dr. Jart+ Ceramidin Cream" />
+                <h2>Dr. Jart+ Ceramidin Cream</h2>
+                <p>A deeply moisturizing cream supercharged with 5-cera complex to strengthen the skin barrier and shield from moisture loss.</p>
+                <span class="price">38.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/511HfD5Hj4L._AC_UF1000,1000_QL80_.jpg" alt="Banila Co Clean It Zero Cleansing Balm Original" />
+                <h2>Banila Co Clean It Zero Cleansing Balm Original</h2>
+                <p>A lightweight, sorbet-like makeup removing cleansing balm that transforms into smooth oil when applied onto skin.</p>
+                <span class="price">19.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://static.beautytocare.com/media/catalog/product/m/i/mizon-multi-function-formula-all-in-one-snail-repair-cream-75ml_1.jpg" alt="Mizon All In One Snail Repair Cream" />
+                <h2>Mizon All In One Snail Repair Cream</h2>
+                <p>A multi-functional repair cream that restores, hydrates, and rejuvenates with snail mucus extract for a clear complexion.</p>
+                <span class="price">25.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="data:image/jpeg;base64,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" alt="TonyMoly The Chok Chok Green Tea Watery Cream" />
+                <h2>TonyMoly The Chok Chok Green Tea Watery Cream</h2>
+                <p>An intense hydrating cream that keeps skin refreshed with 100% pure green tea ferment extract.</p>
+                <span class="price">22.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.4)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://cdn.cosmostore.org/cache/front/shop/products/499/1508655/350x350.jpg" alt="Innisfree Green Tea Seed Serum" />
+                <h2>Innisfree Green Tea Seed Serum</h2>
+                <p>A hydrating serum enriched with Jeju green tea extract and seed oil to deeply nourish and restore moisture to the skin.</p>
+                <span class="price">27.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://ntg-catalog.imgix.net/products/6811047-202307-carousel-1-2.webp?fm=jpg&auto=format&w=1200&h=1443&fit=crop" alt="Neutrogena Hydro Boost Water Gel" />
+                <h2>Neutrogena Hydro Boost Water Gel</h2>
+                <p>A water-gel moisturizer that absorbs quickly like a gel, with the long-lasting, intense moisturizing power of a cream.</p>
+                <span class="price">20.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="Phttps://coreelle.com/cdn/shop/files/elizaveccamilky-piggy-carbonated-bubble-clay-mask-100g-692499_medium.png?v=1717499516" alt="Elizavecca Milky Piggy Carbonated Bubble Clay Mask" />
+                <h2>Elizavecca Milky Piggy Carbonated Bubble Clay Mask</h2>
+                <p>This unique mask cleanses, nourishes, and rejuvenates with its special carbonated formula that bubbles up on your face.</p>
+                <span class="price">11.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.2)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://cdn.shopify.com/s/files/1/0664/5393/0238/files/02_PHS_PUR_23_Digital_one-step_facial_cleanser_group_022_HERO_16oz.jpg?v=1723232367" alt="Philosophy Purity Made Simple Cleanser" />
+                <h2>Philosophy Purity Made Simple Cleanser</h2>
+                <p>A one-step facial cleanser that removes makeup, cleanses, tones, and lightly hydrates the skin.</p>
+                <span class="price">24.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.cultbeauty.com/images?url=https://static.thcdn.com/productimg/original/13324144-7904896743335317.jpg&format=webp&auto=avif" alt="Youth To The People Kale + Green Tea Spinach Vitamins Superfood Cleanser" />
+                <h2>Youth To The People Kale + Green Tea Spinach Vitamins Superfood Cleanser</h2>
+                <p>A nutrient-rich gel cleanser that purifies, balances, and replenishes skin with superfoods and antioxidants.</p>
+                <span class="price">36.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            
+            <div class="product-card">
+                <img src="https://cdn.salla.sa/XjKDR/RfTa7FuPnkhMZrVvsTvmeEhF9o2hYlJ5eRhMHNzP.png" alt="Mario Badescu Facial Spray with Aloe, Herbs and Rosewater" />
+                <h2>Mario Badescu Facial Spray with Aloe, Herbs and Rosewater</h2>
+                <p>A refreshing, hydrating mist to use anywhere anytime that is perfect for dry environments and can be used on hair as well.</p>
+                <span class="price">7.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://d1mqafote9yg5m.cloudfront.net/sites/files/beautyfresh/images/products/202303/800xAUTO/c.jpg" alt="Origins Clear Improvement Active Charcoal Mask" />
+                <h2>Origins Clear Improvement Active Charcoal Mask</h2>
+                <p>A charcoal mask that deeply cleans while visibly reducing pores and helps flush out environmental toxins, dirt, and debris.</p>
+                <span class="price">26.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="Drunk Elephant C-Firma Day Serum" alt="Drunk Elephant C-Firma Day Serum" />
+                <h2>Drunk Elephant C-Firma Day Serum</h2>
+                <p>An antioxidant-packed serum with a potent blend of vitamin C, ferulic acid, and vitamin E designed to firm and brighten the skin.</p>
+                <span class="price">80.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+
+            <div class="product-card">
+                <img src="https://rafiqsonsonline.com/beauty/wp-content/uploads/2023/09/Cerave-Hydrating-Facial-Cleanser-For-Normal-To-Dry-Skin-237Ml-1-1.webp" alt="CeraVe Hydrating Facial Cleanser" />
+                <h2>CeraVe Hydrating Facial Cleanser</h2>
+                <p>A gentle, hydrating cleanser enriched with ceramides and hyaluronic acid designed to help restore the skin’s barrier and retain moisture.</p>
+                <span class="price">14.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.laroche-posay.us/dw/image/v2/AANG_PRD/on/demandware.static/-/Sites-acd-laroche-posay-master-catalog/default/dwa36b8c02/product/March%202023%20packshot%20updates/Anthelios100_MeltInMilk.jpg" alt="La Roche-Posay Anthelios Melt-In Sunscreen Milk" />
+                <h2>La Roche-Posay Anthelios Melt-In Sunscreen Milk</h2>
+                <p>A fast-absorbing, melt-in sunscreen milk with broad spectrum SPF 60 protection that’s water resistant for up to 80 minutes.</p>
+                <span class="price">29.99 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.2)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGKFCjJxoZrqtpn3i0vkUzOMRamQLbRBkpmg&s" alt="The Inkey List Retinol Serum" />
+                <h2>The Inkey List Retinol Serum</h2>
+                <p>A powerful retinol serum that reduces the appearance of fine lines and wrinkles, promoting a firmer look.</p>
+                <span class="price">9.99 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.1)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://lh5.googleusercontent.com/proxy/h8Q61-9j-of3Inw_1OdxQZu7846F8iaSdEo875DgTTw0OxgWoIUMAv3F4xlN7nmoWmFp3uNMAlSp0_r6n4EtkycHhwFvPoyAL8FfSJAsqASWmV269emgewnpOl2eqnO-A9Ejmvh-3D0xU0kNsZc" alt="Glossier Super Bounce Serum" />
+                <h2>Glossier Super Bounce Serum</h2>
+                <p>A hydrating serum packed with hyaluronic acid and Vitamin B5, perfect for thirsty skin.</p>
+                <span class="price">28.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.byrdie.com/thmb/u3HY7gW7Ma-K2gi3a2Vv1XB8DZY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ole-1-fc5de07e64df490cac828739d0ab6ddd.jpg" alt="Ole Henriksen Banana Bright Eye Crème" />
+                <h2>Ole Henriksen Banana Bright Eye Crème</h2>
+                <p>A brightening, vitamin C-rich eye crème that targets signs of aging, reducing the look of dark circles while improving concealer application and wear—inspired by makeup artist secret, banana powder.</p>
+                <span class="price">39.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.3)</div>
+            </div>
+            
+            
+            <div class="product-card">
+                <img src="https://shoplineimg.com/5caf50159f29f000017a9abf/668d08813b461c001f14948b/800x.png?" alt="Kiehl’s Calendula Herbal Extract Alcohol-Free Toner" />
+                <h2>Kiehl’s Calendula Herbal Extract Alcohol-Free Toner</h2>
+                <p>A gentle toner formulated with Calendula, Burdock Root Extract, and Allantoin known for their soothing and calming effects on the skin.</p>
+                <span class="price">21.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.4)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://canavitam.com/cdn/shop/products/562mL_3.png?v=1681716752" alt="Aveeno Positively Radiant Daily Moisturizer SPF 15" />
+                <h2>Aveeno Positively Radiant Daily Moisturizer SPF 15</h2>
+                <p>This daily moisturizer with SPF 15 and soy extract visibly transforms dull, uneven skin into brighter, more radiant skin.</p>
+                <span class="price">16.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.0)</div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/products/innisfree-bija-trouble-facial-foam-150ml-13179659288642_750x.png?v=1637596154" alt="Innisfree Bija Trouble Facial Foam" />
+                <h2>Innisfree Bija Trouble Facial Foam</h2>
+                <p>A foam cleanser with bija seed oil and salicylic acid from willow bark extract that fights blemishes and cleanses skin impurities.</p>
+                <span class="price">12.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.2)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="Phttps://cdn.shopify.com/s/files/1/1603/1117/products/GlowTonic_1_-JUNE2021_x280.jpg?v=1701462479" alt="Pixi Glow Tonic" />
+                <h2>Pixi Glow Tonic</h2>
+                <p>An exfoliating toner that helps to firm and tighten normal to dry, dull skin while minimizing the appearance of pores.</p>
+                <span class="price">15.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://caudalie-americas.imgix.net/media/catalog/product/3/4/344na.jpg?auto=format,compress&cs=srgb&fm=auto&w=1200" alt="Caudalie Vinopure Skin Perfecting Serum" />
+                <h2>Caudalie Vinopure Skin Perfecting Serum</h2>
+                <p>A serum that reduces imperfections, tightens pores, and refines skin texture with natural salicylic acid.</p>
+                <span class="price">49.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBWkuf37dcKYaFNFah6_aSVClLJyoXYk8v0w&s" alt="Mario Badescu Drying Lotion" />
+                <h2>Mario Badescu Drying Lotion</h2>
+                <p>An effective spot treatment formulated with salicylic acid, sulfur, and calamine to visibly reduce blemishes overnight.</p>
+                <span class="price">17.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.1)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://images.asos-media.com/products/sunday-riley-good-genes-lactic-acid-treatment-1-fl-oz/21606740-1-nocolour?$n_640w$&wid=513&fit=constrain" alt="Sunday Riley Good Genes All-In-One Lactic Acid Treatment" />
+                <h2>Sunday Riley Good Genes All-In-One Lactic Acid Treatment</h2>
+                <p>A high-potency, purified grade lactic acid treatment that clarifies, smooths, and retexturizes the skin surface.</p>
+                <span class="price">85.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwSSd0lf1c8rUtpeW5Z6Yk18vZ9_gg_Rl-gQ&s" alt="Origins Drink Up Intensive Overnight Mask" />
+                <h2>Origins Drink Up Intensive Overnight Mask</h2>
+                <p>An overnight mask that deeply hydrates, soothes, and revitalizes the skin while you sleep.</p>
+                <span class="price">27.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://www.etude.com/int/en/media/catalog/product/w/o/wonder_pore_deep_foaming_cleanser_main1.jpg?width=265&height=265&store=default&image-type=image" alt="Etude House Wonder Pore Deep Foaming Cleanser" />
+                <h2>Etude House Wonder Pore Deep Foaming Cleanser</h2>
+                <p>This deep cleansing foam cleans pores and its impurities with blue beads that effectively remove accumulated sebum on skin.</p>
+                <span class="price">9.50 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_RlSSlkDDBYvE5lcBn84adYL_vxuORct9Q&s" alt="COSRX Salicylic Acid Daily Gentle Cleanser" />
+                <h2>COSRX Salicylic Acid Daily Gentle Cleanser</h2>
+                <p>A gentle foaming cleanser that targets blemishes and removes excess oil and dead skin cells.</p>
+                <span class="price">13.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.1)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3d3kC3x_Lydt5MyjbFcoztjw0jVd_t2T9mg&s" alt="Sulwhasoo Snowise Brightening Cleansing Foam" />
+                <h2>Sulwhasoo Snowise Brightening Cleansing Foam</h2>
+                <p>A cleansing foam that effectively removes impurities while leaving the skin moisturized and white ginseng extracts brighten the skin tone.</p>
+                <span class="price">35.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.sephora.com/productimages/sku/s2224632-main-zoom.jpg?imwidth=315" alt="Belief Aqua Bomb Jelly Cleanser" />
+                <h2>Belief Aqua Bomb Jelly Cleanser</h2>
+                <p>A refreshing jelly cleanser that removes all traces of makeup and impurities without stripping the skin of moisture.</p>
+                <span class="price">24.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.4)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51v-dr9HggL.jpg" alt="Dr. Jart+ Dermaclear Micro Foam Cleanser" />
+                <h2>Dr. Jart+ Dermaclear Micro Foam Cleanser</h2>
+                <p>Micro bubbles cleanse deep into pores removing particles and excess oil, leaving skin fresh and clean.</p>
+                <span class="price">22.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsxMgATtJUtya7vW9UltS_kEOlCG7ytAnH8w&s" alt="Mizon Snail Repair Intensive Ampoule" />
+                <h2>Mizon Snail Repair Intensive Ampoule</h2>
+                <p>An ampoule that helps to repair the skin barrier and improve skin texture with its concentrated snail mucin.</p>
+                <span class="price">15.50 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="Phttps://assets-cdn.vtenh.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM2RYQ1E9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--1747d579227d4fe48203b18220134dafe6b58406/515yLd5iR9L.jpg?locale=en" alt="The Ordinary Hyaluronic Acid 2% + B5" />
+                <h2>The Ordinary Hyaluronic Acid 2% + B5</h2>
+                <p>A hydration support formula with ultra-pure, vegan hyaluronic acid enhanced with Vitamin B5 to enhance skin's hydration levels.</p>
+                <span class="price">6.80 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51PH2WeO0RS._SL1500_.jpg" alt="Hada Labo Gokujyun Hyaluronic Acid Lotion" />
+                <h2>Hada Labo Gokujyun Hyaluronic Acid Lotion</h2>
+                <p>A hydrating lotion that uses hyaluronic acid to deeply moisturize skin, leaving it supple and smooth.</p>
+                <span class="price">15.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://myskincareregime.com/wp-content/uploads/2019/06/img_20190625_210411_224969970762109684946.jpg" alt="Biore UV Aqua Rich Watery Essence" />
+                <h2>Biore UV Aqua Rich Watery Essence</h2>
+                <p>This sunscreen combines strong UV protection with light-to-the-touch texture to provide comfortable and effective sun protection.</p>
+                <span class="price">18.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://merryseasons.com.au/cdn/shop/files/D_anm_i-3830_1800x1800_1d135a9b-9c8a-4635-a429-3efefd28c30f_1024x1024.jpg?v=1717405554" alt="Shiseido Senka Perfect Whip Cleansing Foam" />
+                <h2>Shiseido Senka Perfect Whip Cleansing Foam</h2>
+                <p>A rich cleansing foam that moisturizes and cleanses the skin with a dense white lather.</p>
+                <span class="price">12.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/41kgYXDnajL.jpg" alt="The Face Shop Chia Seed Hydrating Lotion" />
+                <h2>The Face Shop Chia Seed Hydrating Lotion</h2>
+                <p>A moisturizing lotion that delivers essential hydration to the skin using chia seed extracts.</p>
+                <span class="price">20.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.4)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/products/Skin-Food-Egg-White-Pore-Mask3_452x.webp?v=1649568258" alt="Skinfood Egg White Pore Mask" />
+                <h2>Skinfood Egg White Pore Mask</h2>
+                <p>A pore-refining mask with egg white extract that penetrates deeply into pores to remove pore-clogging oil.</p>
+                <span class="price">11.50 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/4107qvEJuQL.jpg" alt="Etude House Moistfull Collagen Sleeping Pack" />
+                <h2>Etude House Moistfull Collagen Sleeping Pack</h2>
+                <p>An overnight sleeping pack that uses super collagen water and Baobab water to provide moisture while you sleep.</p>
+                <span class="price">13.50 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.2)</div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/files/centella-blemish-cream-cosrx-official-2_800x.webp?v=1703831774" alt="COSRX Centella Blemish Cream" />
+                <h2>COSRX Centella Blemish Cream</h2>
+                <p>A fast-acting spot treatment cream that reduces the appearance of acne and calms irritated skin.</p>
+                <span class="price">21.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.2)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoglam.com/cdn/shop/files/Soko_Glam_PDP_SonandPark_BeautyWater_860x.png?v=1721154780" alt="Son & Park Beauty Water" />
+                <h2>Son & Park Beauty Water</h2>
+                <p>A multitasking toner and cleansing water that creates a clean base for any skincare and makeup that follows.</p>
+                <span class="price">27.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+    
+            <div class="product-card">
+                <img src="https://i.pinimg.com/736x/f1/83/7c/f1837c17fff44c3738fce691b498d8aa.jpg" alt="Innisfree Jeju Volcanic Pore Clay Mask" />
+                <h2>Innisfree Jeju Volcanic Pore Clay Mask</h2>
+                <p>A clay mask with Jeju volcanic ash that effectively absorbs excess oil and helps clean pores.</p>
+                <span class="price">15.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.1)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/products/Midnight-Blue-Youth-Activating-Drop-600x700-2_1024x1024@2x.jpg?v=1719295731" alt="Klairs Midnight Blue Youth Activating Drop" />
+                <h2>Klairs Midnight Blue Youth Activating Drop</h2>
+                <p>An anti-aging night serum that reduces visible signs of aging and improves the overall appearance of skin health.</p>
+                <span class="price">30.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://banilaco.sg/wp-content/uploads/2020/09/5-1.png" alt="Banila Co It Radiant CC Cream" />
+                <h2>Banila Co It Radiant CC Cream</h2>
+                <p>A color-correcting cream that provides a natural, luminous finish while offering UV protection.</p>
+                <span class="price">22.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.3)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://amc.apglobal.com/image/384224417642/image_jq9096pgm15m73nlh9oeq2rd2r/-FJPG/balancingemulsion_pdp_img_04_pc_int_230320.jpg" alt="Sulwhasoo Essential Balancing Emulsion" />
+                <h2>Sulwhasoo Essential Balancing Emulsion</h2>
+                <p>A moisturizing emulsion that nourishes and balances skin to improve skin texture and elasticity.</p>
+                <span class="price">36.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+        
+            <div class="product-card">
+                <img src="https://gloryofseoul.com/cdn/shop/products/7_1004eed2-6424-478f-bd30-150ec4c03a36.jpg?v=1676810221&width=1445" alt="Etude House Sunprise Mild Airy Finish Sun Milk" />
+                <h2>Etude House Sunprise Mild Airy Finish Sun Milk</h2>
+                <p>A lightweight sunscreen that provides broad spectrum SPF50+ protection with a matte finish.</p>
+                <span class="price">14.50 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/products/35681406cef27e969481f2bf3750692c_1024x1024@2x.jpg?v=1713086330" alt="Heimish All Clean Balm" />
+                <h2>Heimish All Clean Balm</h2>
+                <p>A hypoallergenic cleansing balm great for sensitive skin, removes heavy makeup and impurities without stripping the skin's natural oils.</p>
+                <span class="price">17.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.2)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYOYMego48USuhhLGD3u_vzxOSIl_Xb_Tpzg&s" alt="Acwell Licorice pH Balancing Cleansing Toner" />
+                <h2>Acwell Licorice pH Balancing Cleansing Toner</h2>
+                <p>A light, hydrating, and soothing toner that cleanses and brightens the skin, featuring licorice water and root extracts.</p>
+                <span class="price">20.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.klairscosmetics.com/wp-content/uploads/2021/08/detail-Freshly-Juiced-Vitamin-Drop.jpg" alt="Klairs Freshly Juiced Vitamin Drop" />
+                <h2>Klairs Freshly Juiced Vitamin Drop</h2>
+                <p>An energizing serum containing 5% Vitamin C that brightens, evens out skin tone, and minimizes fine lines.</p>
+                <span class="price">23.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.0)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://glowsecret.co.ke/cdn/shop/files/apieu-pure-block-natural-daily-sun-cream-spf45-pa-100ml-skin-care-apieu-orion-xo-sri-lanka-846346.webp?v=1690528328&width=416" alt="A'PIEU Pure Block Natural Daily Sun Cream" />
+                <h2>A'PIEU Pure Block Natural Daily Sun Cream</h2>
+                <p>This sun cream offers SPF45 PA+++ protection with a gentle, hydrating formula suitable for daily use.</p>
+                <span class="price">12.50 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP9bd2BySv56Jke9egeIYLw0uZQJve_xWQ9w&s" alt="COSRX AHA 7 Whitehead Power Liquid" />
+                <h2>COSRX AHA 7 Whitehead Power Liquid</h2>
+                <p>Formulated to resurface the skin and renew the complexion while reducing the appearance of whiteheads.</p>
+                <span class="price">19.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.3)</div>
+            </div>
+            
+
+            
+            <div class="product-card">
+                <img src="https://www.kanvasbeauty.com.au/cdn/shop/products/4_ab9de892-4874-4e3d-8701-e7ba05522b16_5000x.jpg?v=1638790665" alt="Dear, Klairs Midnight Blue Calming Cream" />
+                <h2>Dear, Klairs Midnight Blue Calming Cream</h2>
+                <p>A calming cream that soothes areas of irritation and redness, ideal for sensitive skin.</p>
+                <span class="price">24.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src=https://soincosme.com/wp-content/uploads/2024/09/PURITO-Centella-Green-Level-Buffet-Serum-60ml-8809563100149-1.webp" alt="Purito Centella Green Level Buffet Serum" />
+                <h2>Purito Centella Green Level Buffet Serum</h2>
+                <p>Packed with Centella Asiatica extract and peptides to rejuvenate aging skin and restore its barrier.</p>
+                <span class="price">21.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://cdn.cosmostore.org/cache/front/shop/products/615/1899671/350x350.jpg" alt="Sulwhasoo First Care Activating Serum" />
+                <h2>Sulwhasoo First Care Activating Serum</h2>
+                <p>An activating serum formulated with JAUM Balancing Complex ensures a glowing and healthier complexion.</p>
+                <span class="price">34.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlVO1T01GfEWjiwp8di190LS09fQo9Z1GjdQ&s" alt="Innisfree Volcanic Pore Cleansing Foam" />
+                <h2>Innisfree Volcanic Pore Cleansing Foam</h2>
+                <p>A pore-cleansing foam made with Jeju volcanic scoria to absorb sebum and purify pores.</p>
+                <span class="price">12.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.0)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/S/abs-image-upload-na/6/AmazonStores/ATVPDKIKX0DER/320b75fe1fefcc602e45b33670509e85.w2000.h2000.jpg" alt="Mamonde Rose Water Toner" />
+                <h2>Mamonde Rose Water Toner</h2>
+                <p>A soothing and hydrating toner infused with 90% rose water to refresh and moisturize the skin.</p>
+                <span class="price">16.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/files/rice-toner-thumbnail-04-concept4_600x.webp?v=1704345547" alt="I'm From Rice Toner" />
+                <h2>I'm From Rice Toner</h2>
+                <p>This toner made from 77.78% rice extract aims to brighten and moisturize the skin.</p>
+                <span class="price">28.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpq6R6wsCYYsjAMtWiD4WFiS0tbl66mDghIw&s" alt="COSRX Low pH Good Morning Gel Cleanser" />
+                <h2>COSRX Low pH Good Morning Gel Cleanser</h2>
+                <p>A gentle gel cleanser with a mildly acidic pH level, perfect for morning cleansing.</p>
+                <span class="price">11.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.2)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://nutroone.com/wp-content/uploads/2019/03/the-ordinary-niacinamide-10-zinc-1.jpg" alt="The Ordinary Niacinamide 10% + Zinc 1%" />
+                <h2>The Ordinary Niacinamide 10% + Zinc 1%</h2>
+                <p>This high-strength vitamin and mineral blemish formula combats blemishes and balances sebum activity.</p>
+                <span class="price">9.70 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://misshaus.com/cdn/shop/products/001_071cb1b0-1dc1-4660-bd0f-af00290d2f8a.jpg?v=1665004664" alt="MISSHA Time Revolution Night Repair Ampoule" />
+                <h2>MISSHA Time Revolution Night Repair Ampoule</h2>
+                <p>An anti-aging night ampoule that helps skin to look and feel dewy, smooth, and youthful.</p>
+                <span class="price">33.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.3)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://us.amorepacific.com/cdn/shop/products/TEPPPage3.jpg?v=1725476366&width=1080" alt="AmorePacific Treatment Enzyme Peel Cleansing Powder" />
+                <h2>AmorePacific Treatment Enzyme Peel Cleansing Powder</h2>
+                <p>A water-activated exfoliator that transforms to a creamy foam for smooth, polished skin.</p>
+                <span class="price">37.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/files/2.AB50_1024x1024@2x.webp?v=1702963064" alt="Belif The True Cream Aqua Bomb" />
+                <h2>Belif The True Cream Aqua Bomb</h2>
+                <p>An ultra-lightweight, oil-free gel-cream that instantly cools and refreshes skin while providing intensive hydration.</p>
+                <span class="price">38.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets-cdn.vtenh.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBK0p2Q2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--1456704cb86f60df0ed79eeb838175ebb100cd6d/p262.jpg?locale=en" alt="Banila Co Clean It Zero Cleansing Balm" />
+                <h2>Banila Co Clean It Zero Cleansing Balm</h2>
+                <p>A cleansing balm that melts away makeup and impurities while hydrating and soothing the skin.</p>
+                <span class="price">18.50 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/products/thumb-7KCc66qp7JeG7J2M1_405x405_9f5551f4-1689-4d50-9c66-f82d10683ed3_405x.jpg?v=1678604991" alt="Dr. Jart+ Cicapair Tiger Grass Cream" />
+                <h2>Dr. Jart+ Cicapair Tiger Grass Cream</h2>
+                <p>A reparative cream to reduce redness and soothe irritated skin with Tiger Grass extract.</p>
+                <span class="price">32.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.0)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoskins.shop/cdn/shop/products/neogen_bio_peel_gauze_peeling_lemon_1512698273_0dad9f1f_640x.jpg?v=1615214147" alt="Neogen Dermalogy Bio-Peel Gauze Peeling Lemon" />
+                <h2>Neogen Dermalogy Bio-Peel Gauze Peeling Lemon</h2>
+                <p>Dual-sided peeling pads enriched with lemon extracts to brighten and clarify skin tone.</p>
+                <span class="price">22.50 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://pyunkangyul.us/cdn/shop/products/cbb367de457d945ae7d1fc2bf813d514.jpg?v=1721110787" alt="Pyunkang Yul Essence Toner" />
+                <h2>Pyunkang Yul Essence Toner</h2>
+                <p>A nutrient-rich, hydrating toner that nourishes and energizes skin with a high concentration of astragalus root extract.</p>
+                <span class="price">15.00 $</span>
+                <div class="rating">⭐⭐⭐⭐ (4.3)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://sokoglam.com/cdn/shop/products/11.23-Soko-Glam-PDP-Image-Benton-Aloe-BHA-Skin-Toner-Korean-Skincare-Product-Packaging_860x.jpg?v=1669214517" alt="Benton Aloe BHA Skin Toner" />
+                <h2>Benton Aloe BHA Skin Toner</h2>
+                <p>This toner combines aloe and salicylic acid to gently exfoliate, soothe, and hydrate the skin.</p>
+                <span class="price">14.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbKtK97CcoLAySfDvcAL2ehwYpOvgoJ5MRdA&s" alt="Laneige Lip Sleeping Mask" />
+                <h2>Laneige Lip Sleeping Mask</h2>
+                <p>An overnight lip mask that soothes and moisturizes for smoother, more supple lips by morning.</p>
+                <span class="price">16.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.klairscosmetics.com/wp-content/uploads/2021/07/580x760-10.jpg" alt="Klairs Supple Preparation Facial Toner" />
+                <h2>Klairs Supple Preparation Facial Toner</h2>
+                <p>A hydrating and calming toner that preps your skin to absorb the next skincare steps more effectively.</p>
+                <span class="price">21.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.moona.store/cdn/shop/products/Cosrx-Oil_Free_Ultra_Moisturizing_Lotion_with_Birch_Sap-Skincare-Moona_Store-NZ-8_jpg_620x.jpg?v=1635845273" alt="COSRX Oil-Free Ultra-Moisturizing Lotion" />
+                <h2>COSRX Oil-Free Ultra-Moisturizing Lotion</h2>
+                <p>This lightweight moisturizer with birch sap is designed to calm and treat sensitive or irritated skin.</p>
+                <span class="price">20.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/61ZWWm4sR6L.jpg" alt="Huxley Secret of Sahara Oil Essence" />
+                <h2>Huxley Secret of Sahara Oil Essence</h2>
+                <p>A unique oil-essence hybrid that blends antioxidant-rich prickly pear seed oil with a lightweight essence.</p>
+                <span class="price">34.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://www.jannysbeauty.com/wp-content/uploads/2021/03/AHA.-BHA.-PHA-30-Days-Miracle-Toner.jpg" alt="Some By Mi AHA BHA PHA 30 Days Miracle Toner" />
+                <h2>Some By Mi AHA BHA PHA 30 Days Miracle Toner</h2>
+                <p>This exfoliating toner helps to refine and smooth the skin while preventing breakouts.</p>
+                <span class="price">19.00 $</span>
+                <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+            </div>
+            
+            
+
+
+            
+        
+                    <!-- More product cards here -->
+                
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,1477 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* Basic Body Styling */
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #e5eef6;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    position: relative; /* Needed for the pseudo-element */
+}
+
+/* Header Styling */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background-color: #d5e5f4;
+    
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+}
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+/* Navigation Links Styling */
+.navigation a {
+    position: relative;
+    font-size: 1.1em;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #000000;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navigation a:hover:after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* Login Button Styling */
+.navigation .btnLogin-popup {
+    width: 100px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #000000;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color:#000000;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.navigation .btnLogin-popup:hover {
+    background: #fff;
+    color: #9ad3ff;
+}
+
+/* Sidebar Container */
+.side-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 500px;
+    width: 200px;
+    z-index: 999;
+    background-color: #b6dcf5;
+    box-shadow: -10px 0 10px #666666;
+    display: none; /* Use flexbox to layout links and button */
+    flex-direction: column; /* Stack items vertically */
+    padding-top: 20px; /* Add some padding from the top */
+}
+
+/* Links Styling */
+.side-bar a {
+    font-size: 1.1em;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 20px; /* Add padding to center the links */
+    transition: color .5s;
+    display: block;
+    position: relative;
+}
+
+/* Link Hover Effect */
+.side-bar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: #000000;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.side-bar a:hover:after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+.side-bar h2{
+    margin-left: 20px;
+}
+/* Login Button Styling */
+.side-bar .btnLogin-popup {
+    width: 150px; /* Adjust button width */
+    height: 40px;
+    background: transparent;
+    border: 2px solid #000000;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #000000;
+    font-weight: 500;
+    margin: 20px auto; /* Center the button horizontally */
+    transition: background .5s, color .5s;
+}
+
+/* Login Button Hover */
+.side-bar .btnLogin-popup:hover {
+    background: #fff;
+    color: #9ad3ff;
+}
+.hideOnMobile {
+    display: inline-block;
+}
+@media (max-width: 800px) {
+    .hideOnMobile{
+        display: none;
+
+
+    }
+    
+}
+@media (max-width: 600px) {
+    .logo-text {
+        font-size: 1.2rem; /* Smaller text size for logo on mobile */
+    }
+
+    .navigation {
+        flex-direction: column; /* Stack navigation links vertically */
+    }
+
+    /* Make the video and other images responsive */
+    .main-content video {
+        width: 10%;
+        height: auto;
+    }
+}
+/* General styling for the search bar */
+.search-b { 
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; /* Center the search bar */
+  
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.search-b input { 
+    flex: 1;
+    padding: 10px;
+    border-radius: 25px;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-b button { 
+    background-color: #007BFF;
+    color: white;
+    margin-left: 20px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.search-b button i { 
+    font-size: 18px;
+}
+
+/* Search bar hover effect */
+.search-b button:hover { 
+    background-color: #0056b3;
+}
+
+
+/* Main content with background image for the top section */
+
+.main-container {
+    top: 0;
+ 
+    
+}
+
+.main-content {
+    margin-top: 150px;
+    background-image: url('rub1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+   
+
+  
+    justify-content: center;
+    align-items: center;
+    background-position: top center;
+     
+}
+
+.scan-container {
+   
+    background-color: #ffffff;
+}
+
+/* Styling for the A-content */
+.A-content {
+  /* Slight white background for contrast */
+  
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%; /* Ensures content doesn't overflow */
+    width: 90%; /* Ensure it takes full available width */
+}
+
+/* Style for the h2 text */
+.A-content h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    padding-top: 120px;
+    position: relative;
+    margin-left: 600px;
+    text-align: right; /* Moves the text to the right */
+}
+.A-content h2 span {
+    color: #007BFF;
+}
+.A-content a{
+    
+    text-decoration: none;
+}
+
+/* Search bar */
+.search-bar {
+    display: flex;
+    justify-content: flex-start; /* Aligns content within the search bar itself */
+    align-items: center;
+    gap: 10px;
+   
+    padding-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 800px; /* This will push the search bar to the right */
+    text-align: right;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.search-bar button i {
+    font-size: 1.2rem;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+.scan-now-btn {
+    padding: 10px 20px;
+    margin-top: 100px;
+    margin-left: 910px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    /* Flexbox parent container */
+}
+.scan-now-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .right-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .search-bar input[type="text"] {
+        width: 150px;
+    }
+   
+}
+
+
+/* Footer Styling */
+.footer {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 100%;
+    position: relative;
+    margin-top: 500px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.footer h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333; /* Dark gray for better contrast */
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer ul li {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.footer ul li a {
+    color: #666666; /* Slightly darker link color */
+    font-size: 16px; /* Larger font size for better readability */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-divider {
+    border: 1px solid #000000;
+    margin: 20px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-bottom p {
+    color: #000000;
+    font-size: 14px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-socials a {
+    color: #000000;
+    transition: color 0.3s;
+}
+
+@media (max-width: 368px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr; /* Switch to 2 columns on smaller screens */
+    }
+    .main-container {
+        margin-top: 50px; /* Reduced from 900px to a more reasonable margin */
+    }    
+
+    /* Reduce margin for the main content */
+    .main-content {
+        margin-top: 20px; /* Reduce margin for better spacing */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack items on top of each other on mobile */
+    }
+    .A-content h2 {
+        margin-left: 250px;
+    }
+    
+
+    .search-bar {
+        margin-left: 420px;
+    }
+
+    .scan-now-btn {
+        margin-left: 350px;
+    }
+}
+
+.wrapper {
+    position: fixed; /* Changed to fixed to ensure it stays in the center */
+    top: 50%; /* Centers it vertically */
+    left: 50%; /* Centers it horizontally */
+    transform: translate(-50%, -50%); /* Corrects the centering by shifting the element back */
+    width: 500px;
+    padding: 30px;
+    background-color: #003668b7;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scale(0); /* Hidden by default */
+    transition: transform 0.5s ease, height 0.2s ease;
+    z-index: 1000; /* Make sure it's above other elements */
+}
+
+.wrapper.active-popup {
+    transform: translate(-50%, -50%) scale(1); /* When active, it scales to full size and stays centered */
+}
+.wrapper .active {
+    height: 520px;
+}
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+}
+
+.wrapper .form-box.login {
+    transition: transform .18 ease;
+    transform: translateX(0);
+}
+
+.wrapper.active .form-box.login {
+    transition: none;
+    transform: translateX(-450px);
+}
+
+
+.wrapper .form-box.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(480px);
+}
+.wrapper.active .form-box.register {
+    transition: transform .18 ease;
+    transform: translateX(0);
+}
+
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #f05353;
+    font-size: 2em;
+    color: #150a43;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    z-index: 1;
+}
+
+.form-box h2 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #d8cfcf;
+    margin: 30px 0;
+
+}
+
+/*.input-box input {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #444;
+    outline: none;
+    font-size: 16px;
+}*/
+
+.input-box label {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #ffffff;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+  
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #ffffff;
+    top: 50%;
+    transform: translateY(-50%);
+    
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #cb7070;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-register {
+    text-align: center;
+    margin: 25px 0 10px;
+    color: #fff;
+    font-size: .9em;
+    font-weight: 500;
+}
+
+.login-register p a {
+    color: #e10000;
+    text-decoration: none;
+    font-weight: 600;
+
+    
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+/* Container for the entire section */
+.steps-section {
+    /* Light blue background */
+    padding: 50px 20px;
+    margin-top: 200px;
+    text-align: center;
+}
+
+/* Style for the section heading */
+.steps-section h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+/* Flexbox container to arrange steps in a row */
+.steps-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+/* Individual step container */
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px; /* Width of each step */
+}
+
+/* The blue circle that contains the number */
+.circle {
+    width: 120px;
+    height: 120px;
+    border: 5px solid #3498DB; /* Blue border */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Space between circle and text */
+    position: relative;
+    row-gap: 40px;
+}
+
+/* Number inside the circle */
+.number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3498DB; /* Blue color for the number */
+}
+
+/* Text below the circle */
+.step p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    margin-top: 0;
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+    /* Adjust Header */
+    .header {
+        padding: 10px 20px;
+    }
+
+    .navigation a {
+        font-size: 1em;
+        margin-left: 20px;
+    }
+
+    /* Adjust Search Bar and Main Content */
+    .search-bar {
+        flex-direction: column;
+        margin-left: 0;
+        padding-top: 20px;
+    }
+
+    .search-bar input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .scan-now-btn {
+        margin-left: 0;
+    }
+
+    /* Adjust Steps Section */
+    .steps-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Adjust Image Section */
+    .image-row {
+        flex-direction: column;
+    }
+
+    .image-section {
+        width: 100%;
+    }
+
+    .main-content {
+        margin-top: 50px;
+        background-size: cover;
+        width: 100%;
+    }
+
+    /* Adjust Video */
+    video {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Responsive for smaller screens (max-width 480px) */
+@media (max-width: 480px) {
+
+    
+    .steps-container {
+        flex-direction: column;
+        gap: 15px;
+        
+    }
+   
+
+    .step {
+        width: 100%;
+        margin-left: 50px;
+    }
+    .steps-section h2 {
+
+        margin-left: 10px;
+    }
+
+    .steps-section p {
+        margin-right: 100px;
+    }
+
+
+    .circle {
+        width: 100px;
+        height: 100px;
+        margin-right: 80px;
+    }
+
+    .scan-now-btn {
+        width: 100%;
+        margin-left: 100px;
+    }
+    .search-bar {
+        margin-top: 200px;
+        margin-left: 50px;
+    }
+
+    .main-content h2 {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-left: 50px;
+    }
+
+    .image-section img {
+        margin-left: 50px;
+        width: 60%;
+        height: auto;
+        gap: 10px;
+    }
+
+    video {
+        width: 80%;
+        margin-left: 30px;
+      
+    }
+}
+
+
+
+.image-row {
+    display: flex;
+    justify-content: space-between; /* or justify-content: center, depending on the spacing you want */
+    align-items: center;
+    gap: 10px; /* Add spacing between images */
+    margin-top: 40px; /* Adds space between the steps and the image row */
+}
+
+.image-section {
+    flex: 2; /* This makes sure each image section takes equal space */
+    text-align: center;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+
+
+/* Search and Filter Section */
+
+/* General Styles */
+
+
+/* Search and Filter Section */
+
+
+
+
+/* Product Grid */
+
+/* Global settings */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Container that holds the product cards */
+.products-container {
+    display: grid;
+    
+    grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
+    gap: 20px; /* Add space between the cards */
+    padding: 20px;
+    max-width: 1200px; /* Limit container width */
+    margin: 0 auto; /* Center the container */
+}
+.Pro-container h1{
+    margin-top: 200px;
+    text-align: center;
+}
+
+.Pro-container {
+    background-color: #ffffff;
+}
+/* Style for each product card */
+.product-card {
+    margin-top: 10px;
+    background-color: #dfeef7;
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect on product card */
+.product-card:hover {
+    transform: translateY(-5px);
+}
+.product-card::after {
+    background-color: #b6dcf5;
+}
+/* Product image styling */
+.product-card img {
+    max-width: 100%; /* Ensure the image doesn't overflow */
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Product title */
+.product-card h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Product description */
+.product-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Price styling */
+.price {
+    display: block;
+    font-size: 16px;
+    color: #2d88ff;
+    margin-bottom: 5px;
+}
+
+/* Rating styling */
+.rating {
+    font-size: 14px;
+    color: #ffaa00;
+}
+@media screen and (max-width: 1024px) {
+    .products-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .products-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .products-container {
+        grid-template-columns: 1fr; /* 1 column on very small screens */
+    }
+}
+
+
+/* Main Advisor Section */
+.advisor-section {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    background-color: #f1f5f9;
+}
+
+.advisor-content {
+    max-width: 50%;
+}
+
+.advisor-content h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.advisor-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Instructions for better analysis */
+.instructions {
+    margin-bottom: 30px;
+}
+
+.instructions h3 {
+    color: #007BFF;
+    font-size: 20px;
+}
+
+.instructions ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.instructions li {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+/* Privacy note section */
+.privacy-note {
+    color: #ff0000;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.privacy-note strong {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Advisor buttons */
+.advisor-buttons {
+    display: flex;
+    gap: 20px;
+    
+}
+
+.advisor-buttons .btn {
+    
+    text-align: center;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+  
+    transition: background-color 0.3s;
+}
+
+.advisor-buttons .go-back-btn {
+    background-color: #c1dfff; /* Light blue background */
+    border: 2px solid #000000; /* Black solid border with 2px thickness */
+    border-radius: 20px; /* Rounded corners */
+    color: #000000; /* Text color */
+    padding: 12px 10px; /* Padding for a bigger button */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Make the text bold */
+    text-decoration: none; /* Remove underline from the link */
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.advisor-buttons .start-now-btn {
+    background-color: #c1dfff; /* Light blue background */
+    border: 2px solid #000000; /* Black solid border with 2px thickness */
+    border-radius: 20px; /* Rounded corners */
+    color: #000000; /* Text color */
+    padding: 12px 10px; /* Padding for a bigger button */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Make the text bold */
+    text-decoration: none; /* Remove underline from the link */
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.advisor-buttons .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Image next to the content */
+.advisor-image img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0;
+}
+
+
+
+/* Responsive Design */
+/* For smaller screens */
+@media (max-width: 768px) {
+    .advisor-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .advisor-content {
+        margin-right: 0;
+        max-width: 100%;
+    }
+
+    .advisor-image {
+        max-width: 90%;
+        margin-top: 20px;
+    }
+
+    .nav-links, .nav-buttons {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+    }
+
+    .nav-buttons .btn {
+        margin-bottom: 10px;
+    }
+
+    .advisor-buttons {
+        justify-content: center;
+    }
+}
+
+
+
+/* Main Advisor Section */
+.take-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full screen height */
+    background-color: #f5faff;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.take-content {
+    max-width: 600px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.take-content h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.instruction {
+    font-size: 18px;
+    color: #007BFF;
+    margin-bottom: 40px;
+}
+
+/* Face Frame */
+.face-frame {
+    width: 300px;
+    height: 400px;
+    margin: 0 auto 30px auto;
+    border: 2px solid #ccc;
+    border-radius: 50%; /* Oval shape */
+    background-color: #f5faff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Take Photo Button */
+.take-photo-btn {
+    padding: 12px 25px;
+    background-color: #4f7da4;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.take-photo-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .take-section {
+        padding: 20px;
+    }
+
+    .take-content {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .take-frame {
+        width: 250px;
+        height: 300px;
+    }
+}
+
+
+
+
+/* Main Question Section */
+.question-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f1f5f9;
+    min-height: 100vh;
+    margin-top: 100px;
+}
+
+.question-content {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.q1-content {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 28px;
+    color: #007BFF;
+    margin-bottom: 40px;
+}
+
+.question-number {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.option {
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    transition: border-color 0.3s, background-color 0.3s, transform 0.3s;
+}
+
+.option:hover {
+    border-color: #007BFF;
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+.option.selected {
+    border-color: #007BFF;
+    background-color: #e6f0fa;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress bar */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.progress {
+    width: 50%; /* Progress for question 1/7 */
+    height: 100%;
+    background-color: #007BFF;
+    border-radius: 5px;
+}
+
+/*ah ti 3*/
+/* Progress bar */
+.progresses-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.progresses {
+    width: 28%; /* Progress for question 2/7 */
+    height: 100%;
+    background-color: #007BFF;
+    border-radius: 5px;
+}
+
+
+/*t4*/
+.progre-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.progre {
+    width: 25%; /* Progress for question 2/7 */
+    height: 100%;
+    background-color: #007BFF;
+    border-radius: 5px;
+}
+
+
+/*ti6*/
+
+
+.progr-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.progr {
+    width: 75%; /* Progress for question 1/7 */
+    height: 100%;
+    background-color: #007BFF;
+    border-radius: 5px;
+}
+/* Buttons */
+
+/* Buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+
+.btn {
+    padding: 12px 25px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn:disabled {
+    background-color: #4f7da4;
+    cursor: not-allowed;
+    
+}
+
+.go-back-btn {
+    background-color: #4f7da4;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.go-back-btn:hover {
+    background-color: #3588d0;
+}
+
+
+/* General styling */
+.reviews-section {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.reviews-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.reviews-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.reviews-slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    max-width: 100%;
+}
+
+.review-card {
+    background-color: #e8f4ff;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 0 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 0 0 33.33%; /* Show 3 cards at a time */
+}
+
+.review-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.rating {
+    font-size: 1.5rem;
+    color: #3498DB;
+}
+
+.review-text {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Scroll arrow buttons */
+.scroll-arrow {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.left-arrow {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.right-arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+    .review-card {
+        flex: 0 0 100%; /* Show only one card at a time */
+    }
+}

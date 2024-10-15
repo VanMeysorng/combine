@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Apsor - Capture Photo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .scan-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Video Section */
+        .video-container {
+            flex: 1;
+            position: relative;
+            background-color: #000;
+        }
+
+        video, canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .instruction {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            text-align: center;
+            z-index: 5;
+        }
+
+        .face-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 350px;
+            pointer-events: none;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .btn {
+            flex: 1;
+            max-width: 200px;
+            padding: 12px;
+            background-color: #4f7da4;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body class="scan-container">
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Skin Apsor Logo">
+            <span>APSOR</span>
+        </div>
+        <i class="fas fa-bars menu-icon"></i>
+    </header>
+
+    <!-- Video and Overlay Section -->
+    <div class="video-container">
+        <div class="instruction">Center your face in the frame</div>
+
+        <video id="video" autoplay playsinline></video>
+
+        <canvas id="canvas" class="hidden"></canvas>
+
+        <svg class="face-overlay" id="overlay" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="50" rx="40" ry="55" stroke="white" stroke-width="1" fill="none" stroke-dasharray="5,5" />
+            <line x1="20" y1="50" x2="80" y2="50" stroke="white" stroke-width="1" stroke-dasharray="5,5" />
+            <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="1" stroke-dasharray="5,5" />
+        </svg>
+    </div>
+
+    <!-- Button Section -->
+    <div class="btn-container">
+        <button id="takePhoto" class="btn">Take Photo</button>
+        <button id="confirmPhoto" class="btn hidden">Confirm</button>
+        <button id="retakePhoto" class="btn hidden">Retake</button>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const overlay = document.getElementById('overlay');
+        const takePhotoBtn = document.getElementById('takePhoto');
+        const confirmPhotoBtn = document.getElementById('confirmPhoto');
+        const retakePhotoBtn = document.getElementById('retakePhoto');
+        const context = canvas.getContext('2d');
+
+        // Start video stream without mirroring
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                alert('Unable to access camera: ' + err.message);
+            });
+
+        // Take Photo
+        takePhotoBtn.addEventListener('click', () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            // Draw the current video frame on the canvas without flipping
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Hide the video and overlay, show the canvas
+            video.classList.add('hidden');
+            overlay.classList.add('hidden');
+            canvas.classList.remove('hidden');
+
+            // Switch button visibility
+            takePhotoBtn.classList.add('hidden');
+            confirmPhotoBtn.classList.remove('hidden');
+            retakePhotoBtn.classList.remove('hidden');
+        });
+
+        // Retake Photo
+        retakePhotoBtn.addEventListener('click', () => {
+            video.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+            canvas.classList.add('hidden');
+
+            takePhotoBtn.classList.remove('hidden');
+            confirmPhotoBtn.classList.add('hidden');
+            retakePhotoBtn.classList.add('hidden');
+        });
+
+        // Confirm Photo
+        confirmPhotoBtn.addEventListener('click', () => {
+            const imageData = canvas.toDataURL('image/png');
+            sessionStorage.setItem('capturedImage', imageData);
+
+            window.location.href = 'Scan3.html';
+        });
+    </script>
+</body>
+
+</html>

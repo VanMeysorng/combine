@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Skin Apsor - Skin Type Questionnaire</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f5f9;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Content container */
+        .question-content {
+            margin-top: 200px;
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #007BFF;;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .progr {
+            width: 100%; /* Adjust progress as per question */
+            height: 100%;
+            background-color: #007BFF;;
+            border-radius: 5px;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .slider-container {
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+
+        input[type="range"]:hover {
+            opacity: 1;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background-color: #4f7da4;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-value {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background-color: #4f7da4;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #007BFF;;
+        }
+
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .question-content {
+                padding: 20px;
+                
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .navigation-buttons {
+                
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="scan-container">
+    <header>
+        <h2 class="logo">
+            <div class="logo">
+                <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+                <span class="logo-text">Skin Apsor</span>
+            </div>
+        </h2>
+        <nav class="navigation">
+            <!-- Navigation links (hidden on mobile) -->
+            <a class="hideOnMobile" href="/index.html">Home</a>
+            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
+            <a class="hideOnMobile" href="/Product.html">Products</a>
+            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <button class="hideOnMobile btnLogin-popup">Login</button>
+
+            <!-- Menu Icon (SVG for mobile menu toggle) -->
+            <a href="#" class="menu-icon" onclick="showSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000">
+                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                </svg>
+            </a>
+        </nav>
+
+        <!-- Sidebar Navigation -->
+        <nav class="side-bar">
+            <a href="#" class="close-icon" onclick="hideSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000">
+                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                </svg>
+            </a>
+            <h2> Skin Apsor</h2>
+            <a href="/index.html">Home</a>
+            <a href="/Scan.html">Scanning</a>
+            <a href="/Product.html">Products</a>
+            <a href="/contact.html">About Us</a>
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+
+        <script>
+            function showSidebar() {
+                const sidebar = document.querySelector('.side-bar');
+                sidebar.style.display = 'flex';
+            }
+
+            function hideSidebar() {
+                const sidebar = document.querySelector('.side-bar');
+                sidebar.style.display = 'none';
+            }
+        </script>
+
+    </header>
+
+    <main>
+        <div class="question-content">
+            <h1>SKIN APSOR ADVISOR</h1>
+            <div class="progress-bar">
+                <div class="progr"></div>
+            </div>
+            <p>Question 4/4</p>
+            <h2>How would you describe your skin type?</h2>
+
+            <!-- Skin Type Slider -->
+            <div class="slider-container">
+                <div class="slider-labels">
+                    <span>Very Dry</span>
+                    <span>Dry</span>
+                    <span>Normal</span>
+                    <span>Combination</span>
+                    <span>Oily</span>
+                    <span>Don't Know</span>
+                </div>
+                <input type="range" id="skinTypeSlider" min="0" max="5" value="2">
+                <div class="slider-value" id="skinTypeValue">Normal</div>
+            </div>
+
+            <!-- Sensitivity Slider -->
+            <div class="slider-container">
+                <div class="slider-labels">
+                    <span>Very Sensitive</span>
+                    <span>Quite Sensitive</span>
+                    <span>Not Sensitive</span>
+                </div>
+                <input type="range" id="sensitivitySlider" min="0" max="2" value="1">
+                <div class="slider-value" id="sensitivityValue">Quite Sensitive</div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation-buttons">
+                <a href="/Scan5.html" class="btn go-back-btn">Go Back</a>
+                <button class="btn next-btn" id="nextBtn">Next</button>
+            </div>
+        </div>
+
+        <script>
+            // Slider handling for skin type
+            const skinTypeSlider = document.getElementById('skinTypeSlider');
+            const skinTypeValue = document.getElementById('skinTypeValue');
+            const skinTypeLabels = ['Very Dry', 'Dry', 'Normal', 'Combination', 'Oily', "Don't Know"];
+
+            skinTypeSlider.oninput = function () {
+                skinTypeValue.innerHTML = skinTypeLabels[this.value];
+            };
+
+            // Slider handling for sensitivity
+            const sensitivitySlider = document.getElementById('sensitivitySlider');
+            const sensitivityValue = document.getElementById('sensitivityValue');
+            const sensitivityLabels = ['Very Sensitive', 'Quite Sensitive', 'Not Sensitive'];
+
+            sensitivitySlider.oninput = function () {
+                sensitivityValue.innerHTML = sensitivityLabels[this.value];
+            };
+
+            // Redirect when clicking "Next" button
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.addEventListener('click', function () {
+                // Here you can save the slider values or redirect to the next question
+                window.location.href = 'Scan7.html';
+            });
+        </script>
+    </main>
+
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+</body>
+
+</html>
