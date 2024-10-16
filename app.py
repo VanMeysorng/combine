@@ -15,11 +15,11 @@ import base64
 from PIL import Image
 
 # Load your dataset
-df = pd.read_csv(r"C:\Users\muoyh\OneDrive\Desktop\dataset\updated_skincare_products.csv")
+df = pd.read_csv("dataset/updated_skincare_products.csv")
 
 app = Flask(__name__)
 app.secret_key = '4545'
-loaded_model = load("C:/Users/muoyh/OneDrive/Desktop/model/final_model.h5")
+loaded_model = load("model/final_model.h5")
 rf_skin = Roboflow(api_key="8RSJzoEweFB7NxxNK6fg")
 project_skin = rf_skin.workspace().project("skin-detection-pfmbg")
 model_skin = project_skin.version(2).model
