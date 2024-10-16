@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Corrected meta tag -->
-    <link rel="stylesheet" href="/style.css"> <!-- Assuming your CSS file is named style.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Skin Apsor</title>
@@ -15,16 +15,16 @@
     <header>
         <h2 class="logo">
             <div class="logo">
-                <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo" class="logo-image">
                 <span class="logo-text">Skin Apsor</span>
             </div>
         </h2>
         <nav class="navigation">
             <!-- Navigation links (hidden on mobile) -->
-            <a class="hideOnMobile" href="/index.html">Home</a>
-            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
-            <a class="hideOnMobile" href="/Product.html">Products</a>
-            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <a class="hideOnMobile" href="/">Home</a>
+            <a class="hideOnMobile" href="/scan">Scanning</a>
+            <a class="hideOnMobile" href="/allproduct">Products</a>
+            <a class="hideOnMobile" href="/contact">About Us</a>
             <button class="hideOnMobile btnLogin-popup">Login</button>
 
             <!-- Menu Icon (SVG for mobile menu toggle) -->
@@ -43,10 +43,10 @@
                 </svg>
             </a>
             <h2> Skin Apsor</h2>
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
-            <a href="/Product.html">Products</a>
-            <a href="/contact.html">About Us</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
+            <a href="/allproduct">Products</a>
+            <a href="/contact">About Us</a>
             <button class="btnLogin-popup">Login</button>
         </nav>
 
@@ -61,8 +61,6 @@
                 sidebar.style.display = 'none';
             }
         </script>
-
-
         
 
     </header>
@@ -72,67 +70,54 @@
             <div class="question-content">
                 <h1>SKIN APSOR ADVISOR</h1>
                 <div class="progress-bar">
-                    <div class="progr"></div>
+                    <div class="progress"></div>
                 </div>
-                <p class="question-number">Question 3/4</p>
-                <h2 class="question-title">ARE YOU ALLERGY TO ANY INGREDIENTS ?</h2>
+                <p class="question-number">Question 2/4</p>
+                <h2 class="question-title">HOW DO YOU IDENTIFY?</h2>
                 
-                <!-- Options (Multiple Selectable) -->
+                <!-- Options (Selectable) -->
                 <div class="options-container">
-                    <div class="option" data-value="Fragrances">"Fragrances</div>
-                    <div class="option" data-value="Alcohol">Alcohol</div>
-                    <div class="option" data-value="Synthetics Colors">Synthetics Colors</div>
-                    <div class="option" data-value="Essential Oils">Essential Oils</div>
-                    <div class="option" data-value="Sulfates">Sulfates</div>
-                    <div class="option" data-value="Benzoyl Peroxide">Benzoyl Peroxide</div>
-                    <div class="option" data-value="Formaldehyde">Formaldehyde</div>
-                    <div class="option" data-value="Not Any">Not Any</div>
-                   
-                    
+                    <div class="option" data-value="Frecles">Frecles</div>
+                    <div class="option" data-value="Scars">Scars</div>
+                    <div class="option" data-value="Dark Circle">Dark Circle</div>
+                    <div class="option" data-value="Textures">Textures</div>
+                    <div class="option" data-value="Dark Spots">Dark Spots</div>
+                    <div class="option" data-value="Acnes">Acnes</div>
+                    <div class="option" data-value="Pores">Pores</div>
+                    <div class="option" data-value="Redness">Redness</div>
                 </div>
     
                 <!-- Navigation Buttons -->
                 <div class="navigation-buttons">
-                    <a href="/Scan4.html" class="btn go-back-btn">Go Back</a>
-                    <button class="btn next-btn" id="nextBtn" onclick="window.location.href='Scan6.html'" disabled>Next</button>
+                    <a href="/survey1" class="btn go-back-btn">Go Back</a>
+                    <button class="btn next-btn" id="nextBtn" onclick="window.location.href='/survey3'" disabled>Next</button>
 
                 </div>
             </div>
         </section>
-    
         <script>
-            // JavaScript to handle multiple selections
+            // JavaScript to handle the selection of options
             const options = document.querySelectorAll('.option');
             const nextBtn = document.getElementById('nextBtn');
-            let selectedOptions = [];
+            let selectedOption = '';
     
             options.forEach(option => {
                 option.addEventListener('click', function () {
-                    const value = this.getAttribute('data-value');
-                    
-                    // Toggle selection
-                    if (selectedOptions.includes(value)) {
-                        selectedOptions = selectedOptions.filter(opt => opt !== value);
-                        this.classList.remove('selected');
-                    } else {
-                        selectedOptions.push(value);
-                        this.classList.add('selected');
-                    }
-    
-                    // Enable the Next button if at least one option is selected
-                    nextBtn.disabled = selectedOptions.length === 0;
+                    options.forEach(o => o.classList.remove('selected')); // Remove 'selected' class from all options
+                    this.classList.add('selected'); // Add 'selected' class to clicked option
+                    selectedOption = this.getAttribute('data-value'); // Store selected option
+                    nextBtn.disabled = false; // Enable Next button
                 });
             });
     
             nextBtn.addEventListener('click', function () {
-                if (selectedOptions.length > 0) {
-                    alert(`You selected: ${selectedOptions.join(', ')}`);
-                    // Perform action with the selected options
-                    // Navigate to next question or page
-                    window.location.href = 'Scan6.html'; // Example of navigation
+                if (selectedOption) {
+                    alert(`You selected: ${selectedOption}`); // Perform action with the selected option
+                    // Here, you can add the logic to navigate to the next question
                 }
             });
         </script>
+        
     </main>
 
     <footer>

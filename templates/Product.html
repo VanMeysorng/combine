@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Skin Apsor</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 </head>
 <style>
     /* Resetting default styles */
@@ -211,16 +210,16 @@
     <header>
         <h2 class="logo">
             <div class="logo">
-                <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo" class="logo-image">
                 <span class="logo-text">Skin Apsor</span>
             </div>
         </h2>
         <nav class="navigation">
             <!-- Navigation links (hidden on mobile) -->
-            <a class="hideOnMobile" href="/index.html">Home</a>
-            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
-            <a class="hideOnMobile" href="/Product.html">Products</a>
-            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <a class="hideOnMobile" href="/">Home</a>
+            <a class="hideOnMobile" href="/scan">Scanning</a>
+            <a class="hideOnMobile" href="/allproduct">Products</a>
+            <a class="hideOnMobile" href="/contact">About Us</a>
             <button class="hideOnMobile btnLogin-popup">Login</button>
             <!-- Menu Icon (SVG for mobile menu toggle) -->
             <a href="#" class="menu-icon" onclick="showSidebar()">
@@ -248,12 +247,12 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
             </a>
             <h2> Skin Apsor</h2>
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
         
-            <a href="/Product.html">Products</a>
+            <a href="/allproduct">Products</a>
             
-            <a href="/contact.html">About Us</a>
+            <a href="/contact">About Us</a>
             <button class="btnLogin-popup">Login</button>
 
         </nav>

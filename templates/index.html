@@ -89,7 +89,6 @@
         
         
         .hero {
-            background-image: url('/home.jpg');
             background-size: cover;
             background-position: center;
             padding: 50px 20px;
@@ -278,13 +277,13 @@
 
     <header>
         <div class="logo">
-            <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo" class="logo-image">
             <span class="logo-text">Skin Apsor</span>
         </div>
 
         <nav class="navigation">
-            <a class="hideOnMobile" href="/index.html">Home</a>
-            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
+            <a class="hideOnMobile" href="/">Home</a>
+            <a class="hideOnMobile" href="/scan">Scanning</a>
             <a class="hideOnMobile" href="/Product.html">Products</a>
             <a class="hideOnMobile" href="/contact.html">About Us</a>
             <button class="hideOnMobile btnLogin-popup">Login</button>
@@ -303,15 +302,15 @@
                 </svg>
             </a>
             <h2>Skin Apsor</h2>
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
             <a href="/Product.html">Products</a>
             <a href="/contact.html">About Us</a>
             <button class="btnLogin-popup">Login</button>
         </nav>
     </header>
 
-    <div class="hero">
+    <div class="hero" style="background-image: url('{{ url_for('static', filename='img/home.jpg') }}')">
         <div class="search-bar">
             <input type="text" placeholder="Search for products...">
             <button type="submit">Search</button>
@@ -321,7 +320,7 @@
             <h1>Skin Apsor: Discover Your Perfect Skincare Routine</h1>
             <p>At Skin Apsor, we offer personalized skincare recommendations through our advanced scanning tool, guiding you to the right products for radiant, healthy skin.</p>
             <p>Unlock radiant skin with Skin Apsor. Our tailored solutions address your unique concerns, promoting a healthy, glowing complexion.</p>
-            <a href="/Scan.html">
+            <a href="/scan">
                 <button class="scan-btn">Scan Now!</button>
             </a>
         </div>
@@ -329,15 +328,15 @@
 
     <section class="promotion">
         <h2>PROMOTION</h2>
-        <img src="img/promotion.jpg" alt="Promotion Banner">
+        <img src="{{ url_for('static', filename='img/promotion.jpg') }}" alt="Promotion Banner">
     </section>
 
     <section class="brands">
         <div class="brand-logo">
-            <img src="img/ordi.png" alt="The Ordinary">
+            <img src="{{ url_for('static', filename='img/ordi.png') }}" alt="The Ordinary">
         </div>
         <div class="brand-logo">
-            <img src="img/style-korean.jpg" alt="Style Korean">
+            <img src="{{ url_for('static', filename='img/style-korean.jpg') }}" alt="Style Korean">
         </div>
     </section>
     
@@ -345,7 +344,7 @@
     <section class="best-product">
         <h2>Best Product</h2>
         <div class="product-card">
-            <img src="img/product.jpg" alt="Best Product">
+            <img src="{{ url_for('static', filename='img/product.jpg') }}" alt="Best Product">
             
     </section>
 
@@ -355,10 +354,10 @@
                 <div>
                     <h2>Skin Apsor</h2>
                     <ul>
-                        <li><a href="/index.html">Home</a></li>
-                        <li><a href="/Scan.html">Scan</a></li>
-                        <li><a href="/Product.html">Products</a></li>
-                        <li><a href="/contact.html">About Us</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/scan">Scan</a></li>
+                        <li><a href="/allproduct">Products</a></li>
+                        <li><a href="/contact">About Us</a></li>
                     </ul>
                 </div>
 

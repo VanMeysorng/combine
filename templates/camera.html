@@ -127,7 +127,7 @@
     <!-- Header -->
     <header>
         <div class="logo">
-            <img src="img/logo.png" alt="Skin Apsor Logo">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo">
             <span>APSOR</span>
         </div>
         <i class="fas fa-bars menu-icon"></i>
@@ -204,11 +204,26 @@
         });
 
         // Confirm Photo
-        confirmPhotoBtn.addEventListener('click', () => {
-            const imageData = canvas.toDataURL('image/png');
-            sessionStorage.setItem('capturedImage', imageData);
+        confirmPhotoBtn.addEventListener('click', async () => {
+            const imageData = canvas.toDataURL('image/jpeg');  // Capture image as base64
 
-            window.location.href = 'Scan3.html';
+            // Send the image data to the backend for analysis
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: imageData })
+            });
+
+            const result = await response.json();
+
+            // Redirect to analysis page with the prediction data
+            if (response.status === 200) {
+                window.location.href = `/analysis?classes=${JSON.stringify(result.classes)}&recommendations=${JSON.stringify(result.recommendations)}&annotated_image=${result.annotated_image}`;
+            } else {
+                console.error('Error in prediction', result);
+            }
         });
     </script>
 </body>

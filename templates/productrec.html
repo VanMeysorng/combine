@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
     <title>Skin Apsor</title>
 
     <style>
@@ -72,19 +72,21 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             max-width: 80%;
-            padding: 0 10px; /* Added padding to fix cut-off issue */
+            padding: 0 10px;
             justify-content: flex-start;
         }
 
         .ingredient-item {
-            min-width: 140px;
-            min-height: 140px;
+            min-width: 220px;
+            min-height: 320px;
             background-color: #72c5ff;
             margin: 10px;
             border-radius: 10px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding: 15px;
             font-size: 1.1em;
             color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -92,9 +94,27 @@
             cursor: pointer;
         }
 
+        .ingredient-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
         .ingredient-item:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .ingredient-item .price {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .ingredient-item .rank {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #ffd700;
         }
 
         /* Button Styles */
@@ -136,8 +156,8 @@
             }
 
             .ingredient-item {
-                min-width: 120px;
-                min-height: 120px;
+                min-width: 180px;
+                min-height: 280px;
                 font-size: 1em;
             }
 
@@ -153,8 +173,8 @@
 
         @media (max-width: 480px) {
             .ingredient-item {
-                min-width: 80px;
-                min-height: 100px;
+                min-width: 150px;
+                min-height: 250px;
             }
 
             .btn {
@@ -177,16 +197,16 @@
     <header>
         <h2 class="logo">
             <div class="logo">
-                <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo" class="logo-image">
                 <span class="logo-text">Skin Apsor</span>
             </div>
         </h2>
         <nav class="navigation">
             <!-- Navigation links (hidden on mobile) -->
-            <a class="hideOnMobile" href="/index.html">Home</a>
-            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
-            <a class="hideOnMobile" href="/Product.html">Products</a>
-            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <a class="hideOnMobile" href="/">Home</a>
+            <a class="hideOnMobile" href="/scan">Scanning</a>
+            <a class="hideOnMobile" href="/allproduct">Products</a>
+            <a class="hideOnMobile" href="/contact">About Us</a>
             <button class="hideOnMobile btnLogin-popup">Login</button>
 
             <!-- Menu Icon (SVG for mobile menu toggle) -->
@@ -205,10 +225,10 @@
                 </svg>
             </a>
             <h2> Skin Apsor</h2>
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
-            <a href="/Product.html">Products</a>
-            <a href="/contact.html">About Us</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
+            <a href="/allproduct">Products</a>
+            <a href="/contact">About Us</a>
             <button class="btnLogin-popup">Login</button>
         </nav>
 
@@ -223,45 +243,42 @@
                 sidebar.style.display = 'none';
             }
         </script>
-
-
-        
-
     </header>
+
     <main>
         <div class="ingredients-section">
-            <h2>INGREDIENTS RECOMMENDATIONS</h2>
-        
+            <h2>PRODUCTS RECOMMENDATIONS</h2>
+
             <div class="ingredients-box">
-                <!-- Ingredients You Should Use -->
+                <!-- Products You Should Use -->
                 <div class="ingredients-group">
-                    <h3>Ingredients You Should <span class="highlight">Use:</span></h3>
+                    <h3>Products You Should <span class="highlight">Use:</span></h3>
                     <div class="ingredients-container">
                         <div class="ingredients-list" id="use">
-                            <div class="ingredient-item" onclick="addToCart('Ingredient 1')">Ingredient 1</div>
-                            <div class="ingredient-item" onclick="addToCart('Ingredient 2')">Ingredient 2</div>
-                            <div class="ingredient-item" onclick="addToCart('Ingredient 3')">Ingredient 3</div>
-                            
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Ingredients You Should Avoid -->
-                <div class="ingredients-group">
-                    <h3>Ingredients You Should <span class="highlight avoid">Avoid:</span></h3>
-                    <div class="ingredients-container avoid-container">
-                        <div class="ingredients-list" id="avoid">
-                            <div class="ingredient-item" onclick="addToCart('Ingredient 1')">Ingredient 1</div>
-                            <div class="ingredient-item" onclick="addToCart('Ingredient 2')">Ingredient 2</div>
-                            <div class="ingredient-item" onclick="addToCart('Ingredient 3')">Ingredient 3</div>
+                            {% if recommendations %}
+                                {% for recommendation in recommendations %}
+                                    {% for product in recommendation[1] %}
+                                    <div class="ingredient-item" onclick="addToCart('{{ product.Name }}')">
+                                        <img src="{{ product.image }}" alt="{{ product.Name }}">
+                                        <strong>{{ product.Label }}</strong>
+                                        <p>Brand: {{ product.Brand }}</p>
+                                        <p>Name: {{ product.Name }}</p>
+                                        <p class="price">Price: ${{ product.Price }}</p>
+                                        <p class="rank">Rank: {{ product.Rank }}</p>
+                                    </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% else %}
+                                <div>No products available.</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-        
+
             <div class="navigation-buttons">
-                <a href="/Scan7.html" class="btn go-back-btn">Go Back</a>
-                <a href="/Scan9.html" class="btn">Next</a>
+                <a href="/ingrerec" class="btn go-back-btn">Go Back</a>
+                <a href="/allproduct" class="btn">Next</a>
             </div>
         </div>
     </main>
@@ -278,4 +295,5 @@
         }
     </script>
 </body>
+
 </html>

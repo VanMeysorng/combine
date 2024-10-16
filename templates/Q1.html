@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Corrected meta tag -->
-    <link rel="stylesheet" href="/style.css"> <!-- Assuming your CSS file is named style.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Skin Apsor</title>
@@ -15,16 +15,16 @@
     <header>
         <h2 class="logo">
             <div class="logo">
-                <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo" class="logo-image">
                 <span class="logo-text">Skin Apsor</span>
             </div>
         </h2>
         <nav class="navigation">
             <!-- Navigation links (hidden on mobile) -->
-            <a class="hideOnMobile" href="/index.html">Home</a>
-            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
-            <a class="hideOnMobile" href="/Product.html">Products</a>
-            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <a class="hideOnMobile" href="/">Home</a>
+            <a class="hideOnMobile" href="/scan">Scanning</a>
+            <a class="hideOnMobile" href="/allproduct">Products</a>
+            <a class="hideOnMobile" href="/contact">About Us</a>
             <button class="hideOnMobile btnLogin-popup">Login</button>
 
             <!-- Menu Icon (SVG for mobile menu toggle) -->
@@ -43,10 +43,10 @@
                 </svg>
             </a>
             <h2> Skin Apsor</h2>
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
-            <a href="/Product.html">Products</a>
-            <a href="/contact.html">About Us</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
+            <a href="/allproduct">Products</a>
+            <a href="/contact">About Us</a>
             <button class="btnLogin-popup">Login</button>
         </nav>
 
@@ -90,8 +90,8 @@
     
                 <!-- Navigation Buttons -->
                 <div class="navigation-buttons">
-                    <a href="/Scan2.html" class="btn go-back-btn">Go Back</a>
-                    <button class="btn next-btn" id="nextBtn" onclick="window.location.href='Scan4.html'" disabled>Next</button>
+                    <a href="/camera" class="btn go-back-btn">Go Back</a>
+                    <button class="btn next-btn" id="nextBtn" onclick="window.location.href='/survey2'" disabled>Next</button>
 
                 </div>
             </div>
@@ -126,7 +126,7 @@
                     alert(`You selected: ${selectedOptions.join(', ')}`);
                     // Perform action with the selected options
                     // Navigate to next question or page
-                    window.location.href = 'Scan4.html'; // Example of navigation
+                    window.location.href = 'survey2'; // Example of navigation
                 }
             });
         </script>

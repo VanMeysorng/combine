@@ -14,7 +14,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-image: url('img/sample.jpg'); /* Replace with your image path */
+ /* Replace with your image path */
             background-size: cover;
             background-position: center;
             font-family: Arial, sans-serif;
@@ -184,19 +184,19 @@
     </style>
 </head>
 
-<body>
+<body style="background-image: url('{{ url_for('static', filename='img/sample.jpg') }}')">
 
     <header>
         <div class="logo">
-            <img src="img/logo.png" alt="Skin Apsor Logo">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo">
             <span class="logo-text">Skin Apsor</span>
         </div>
 
         <nav class="navigation hideOnMobile">
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
-            <a href="/Product.html">Products</a>
-            <a href="/contact.html">About Us</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
+            <a href="/allproduct">Products</a>
+            <a href="/contact">About Us</a>
         </nav>
 
         <button class="btnLogin-popup hideOnMobile">Login</button>
@@ -213,10 +213,10 @@
                     <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                 </svg>
             </a>
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
-            <a href="/Product.html">Products</a>
-            <a href="/contact.html">About Us</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
+            <a href="/allproduct">Products</a>
+            <a href="/contact">About Us</a>
             <button class="btnLogin-popup">Login</button>
         </nav>
     </header>
@@ -250,7 +250,7 @@
 
         function confirmSelfie() {
             alert("By taking a selfie, you have read and agree to the terms and conditions.");
-            window.location.href = 'Scan2.html';
+            window.location.href = '/camera';
         }
     </script>
 

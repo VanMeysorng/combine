@@ -14,7 +14,7 @@
             padding: 0;
             width: 100%;
             height: 1000px;
-            background-image: url('img/sample.jpg'); /* Replace with your image path */
+ /* Replace with your image path */
             background-size: cover;
             background-position: center;
             
@@ -172,19 +172,19 @@
     </style>
 </head>
 
-<body>
+<body style="background-image: url('{{ url_for('static', filename='img/sample.jpg') }}')">
 
     <header>
         <div class="logo">
-            <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo" class="logo-image">
             <span class="logo-text">Skin Apsor</span>
         </div>
 
         <nav class="navigation">
-            <a class="hideOnMobile" href="/index.html">Home</a>
-            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
-            <a class="hideOnMobile" href="/Product.html">Products</a>
-            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <a class="hideOnMobile" href="/">Home</a>
+            <a class="hideOnMobile" href="/scan">Scanning</a>
+            <a class="hideOnMobile" href="allproduct">Products</a>
+            <a class="hideOnMobile" href="contact">About Us</a>
             <button class="hideOnMobile btnLogin-popup">Login</button>
 
             <a href="#" class="menu-icon" onclick="showSidebar()">
@@ -201,10 +201,10 @@
                 </svg>
             </a>
             <h2>Skin Apsor</h2>
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
-            <a href="/Product.html">Products</a>
-            <a href="/contact.html">About Us</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
+            <a href="allproduct">Products</a>
+            <a href="contact">About Us</a>
             <button class="btnLogin-popup">Login</button>
         </nav>
     </header>
@@ -230,7 +230,7 @@
             <p>In just a few seconds, you will see your skin analysis and recommended products that suit you.</p>
         </div>
 
-        <button class="start-button" onclick="window.location.href='Scan1.html'">START NOW</button>
+        <button class="start-button" onclick="window.location.href='/instruction'">START NOW</button>
 
     </div>
 

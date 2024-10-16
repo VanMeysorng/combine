@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
     <title>Skin Apsor</title>
 
     <style>
@@ -177,16 +177,16 @@
     <header>
         <h2 class="logo">
             <div class="logo">
-                <img src="img/logo.png" alt="Skin Apsor Logo" class="logo-image">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Skin Apsor Logo" class="logo-image">
                 <span class="logo-text">Skin Apsor</span>
             </div>
         </h2>
         <nav class="navigation">
             <!-- Navigation links (hidden on mobile) -->
-            <a class="hideOnMobile" href="/index.html">Home</a>
-            <a class="hideOnMobile" href="/Scan.html">Scanning</a>
-            <a class="hideOnMobile" href="/Product.html">Products</a>
-            <a class="hideOnMobile" href="/contact.html">About Us</a>
+            <a class="hideOnMobile" href="/">Home</a>
+            <a class="hideOnMobile" href="/scan">Scanning</a>
+            <a class="hideOnMobile" href="/allproduct">Products</a>
+            <a class="hideOnMobile" href="/contact">About Us</a>
             <button class="hideOnMobile btnLogin-popup">Login</button>
 
             <!-- Menu Icon (SVG for mobile menu toggle) -->
@@ -205,10 +205,10 @@
                 </svg>
             </a>
             <h2> Skin Apsor</h2>
-            <a href="/index.html">Home</a>
-            <a href="/Scan.html">Scanning</a>
-            <a href="/Product.html">Products</a>
-            <a href="/contact.html">About Us</a>
+            <a href="/">Home</a>
+            <a href="/scan">Scanning</a>
+            <a href="/allproduct">Products</a>
+            <a href="/contact">About Us</a>
             <button class="btnLogin-popup">Login</button>
         </nav>
 
@@ -230,17 +230,17 @@
     </header>
     <main>
         <div class="ingredients-section">
-            <h2>PRODUCTS RECOMMENDATIONS</h2>
+            <h2>INGREDIENTS RECOMMENDATIONS</h2>
         
             <div class="ingredients-box">
                 <!-- Ingredients You Should Use -->
                 <div class="ingredients-group">
-                    <h3>Products You Should <span class="highlight">Use:</span></h3>
+                    <h3>Ingredients You Should <span class="highlight">Use:</span></h3>
                     <div class="ingredients-container">
                         <div class="ingredients-list" id="use">
-                            <div class="ingredient-item" onclick="addToCart('Product 1')">Product 1</div>
-                            <div class="ingredient-item" onclick="addToCart('Product 2')">Product 2</div>
-                            <div class="ingredient-item" onclick="addToCart('Product 3')">Product 3</div>
+                            <div class="ingredient-item" onclick="addToCart('Ingredient 1')">Ingredient 1</div>
+                            <div class="ingredient-item" onclick="addToCart('Ingredient 2')">Ingredient 2</div>
+                            <div class="ingredient-item" onclick="addToCart('Ingredient 3')">Ingredient 3</div>
                             
                         </div>
                     </div>
@@ -248,20 +248,20 @@
         
                 <!-- Ingredients You Should Avoid -->
                 <div class="ingredients-group">
-                    <h3>Products You Should <span class="highlight avoid">Avoid:</span></h3>
+                    <h3>Ingredients You Should <span class="highlight avoid">Avoid:</span></h3>
                     <div class="ingredients-container avoid-container">
                         <div class="ingredients-list" id="avoid">
-                            <div class="ingredient-item" onclick="addToCart('Product 1')">Product 1</div>
-                            <div class="ingredient-item" onclick="addToCart('Product 2')">Product 2</div>
-                            <div class="ingredient-item" onclick="addToCart('Product 3')">IProduct 3</div>
+                            <div class="ingredient-item" onclick="addToCart('Ingredient 1')">Ingredient 1</div>
+                            <div class="ingredient-item" onclick="addToCart('Ingredient 2')">Ingredient 2</div>
+                            <div class="ingredient-item" onclick="addToCart('Ingredient 3')">Ingredient 3</div>
                         </div>
                     </div>
                 </div>
             </div>
         
             <div class="navigation-buttons">
-                <a href="/Scan8.html" class="btn go-back-btn">Go Back</a>
-                <a href="/Product.html" class="btn">Next</a>
+                <a href="/analysis" class="btn go-back-btn">Go Back</a>
+                <a href="/productrec" class="btn">Next</a>
             </div>
         </div>
     </main>
